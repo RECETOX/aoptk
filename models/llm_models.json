@@ -6,8 +6,8 @@
     "refresh_command": "scripts/update_llm_models.sh",
     "note": "Observed fields come from the status API. `note` is curated by hand and is preserved across refreshes; the API exposes no capability or context-length data. To record what we know about a model, edit its `note` in the committed file; a note naming DEFAULT_MODEL or DEFAULT_VISION_MODEL is required by tests/test_llm_model_catalog.py. Every other field is overwritten."
   },
-  "observed_at": "2026-09-24T15:21:10Z",
-  "previous_observed_at": "2026-09-24T15:14:28Z",
+  "observed_at": "2026-09-28T09:51:56Z",
+  "previous_observed_at": "2026-09-24T15:21:10Z",
   "models": [
     {
       "name": "2adixArk/Qwen3.8-27B-NVFP4",
@@ -41,31 +41,31 @@
     },
     {
       "name": "Deepseek-v4-flash",
-      "status": "online",
+      "status": "down",
       "first_seen": "2026-07-31T23:00:06Z",
-      "last_seen": "2026-09-24T15:21:06Z",
-      "task_class": "generative",
-      "note": "Not yet reviewed by aoptk maintainers.",
-      "snapshot": {
-        "uptime_samples_online": 45,
-        "uptime_samples_total": 48,
-        "generation_tokens_rate": 458.6592592592593,
-        "requests_running": 11,
-        "requests_waiting": 0
-      }
-    },
-    {
-      "name": "Deepseek-v4.1-flash",
-      "status": "archived",
-      "first_seen": "2026-09-13T23:51:06Z",
-      "last_seen": "2026-09-14T04:43:06Z",
+      "last_seen": "2026-09-26T10:25:06Z",
       "task_class": "generative",
       "note": "Not yet reviewed by aoptk maintainers.",
       "snapshot": {
         "uptime_samples_online": 0,
         "uptime_samples_total": 48,
-        "generation_tokens_rate": 170.64814814814815,
+        "generation_tokens_rate": 367.2166666666667,
         "requests_running": 8,
+        "requests_waiting": 0
+      }
+    },
+    {
+      "name": "Deepseek-v4.1-flash",
+      "status": "online",
+      "first_seen": "2026-09-13T23:51:06Z",
+      "last_seen": "2026-09-28T09:51:06Z",
+      "task_class": "generative",
+      "note": "Not yet reviewed by aoptk maintainers.",
+      "snapshot": {
+        "uptime_samples_online": 43,
+        "uptime_samples_total": 48,
+        "generation_tokens_rate": 564.8537037037037,
+        "requests_running": 10,
         "requests_waiting": 0
       }
     },
@@ -73,14 +73,14 @@
       "name": "Gemma4",
       "status": "online",
       "first_seen": "2026-07-28T11:41:06Z",
-      "last_seen": "2026-09-24T15:21:06Z",
+      "last_seen": "2026-09-28T09:51:06Z",
       "task_class": "generative",
       "note": "Not yet reviewed by aoptk maintainers.",
       "snapshot": {
         "uptime_samples_online": 48,
         "uptime_samples_total": 48,
-        "generation_tokens_rate": 54.74444444444445,
-        "requests_running": 2,
+        "generation_tokens_rate": 109.0537037037037,
+        "requests_running": 6,
         "requests_waiting": 0
       }
     },
@@ -94,23 +94,23 @@
       "snapshot": {
         "uptime_samples_online": 0,
         "uptime_samples_total": 48,
-        "generation_tokens_rate": 88.23703703703703,
-        "requests_running": 1,
-        "requests_waiting": 0
+        "generation_tokens_rate": null,
+        "requests_running": null,
+        "requests_waiting": null
       }
     },
     {
       "name": "Glm-5.3",
       "status": "online",
       "first_seen": "2026-08-26T23:46:06Z",
-      "last_seen": "2026-09-24T15:21:06Z",
+      "last_seen": "2026-09-28T09:51:06Z",
       "task_class": "generative",
       "note": "Not yet reviewed by aoptk maintainers.",
       "snapshot": {
         "uptime_samples_online": 48,
         "uptime_samples_total": 48,
-        "generation_tokens_rate": 517.6092592592593,
-        "requests_running": 23,
+        "generation_tokens_rate": 603.5425925925927,
+        "requests_running": 16,
         "requests_waiting": 0
       }
     },
@@ -124,23 +124,23 @@
       "snapshot": {
         "uptime_samples_online": 0,
         "uptime_samples_total": 48,
-        "generation_tokens_rate": 374.10185185185185,
-        "requests_running": 4,
-        "requests_waiting": 0
+        "generation_tokens_rate": null,
+        "requests_running": null,
+        "requests_waiting": null
       }
     },
     {
       "name": "Gpt-oss-120b",
       "status": "online",
       "first_seen": "2026-07-28T11:41:06Z",
-      "last_seen": "2026-09-24T15:21:06Z",
+      "last_seen": "2026-09-28T09:51:06Z",
       "task_class": "generative",
       "note": "aoptk text default (DEFAULT_MODEL). The live non-vision tests pass against it.",
       "snapshot": {
         "uptime_samples_online": 48,
         "uptime_samples_total": 48,
-        "generation_tokens_rate": 251.95740740740743,
-        "requests_running": 4,
+        "generation_tokens_rate": 203.13333333333335,
+        "requests_running": 0,
         "requests_waiting": 0
       }
     },
@@ -148,14 +148,14 @@
       "name": "Kimi-k3",
       "status": "online",
       "first_seen": "2026-07-28T11:41:06Z",
-      "last_seen": "2026-09-24T15:21:06Z",
+      "last_seen": "2026-09-28T09:51:06Z",
       "task_class": "generative",
       "note": "Not yet reviewed by aoptk maintainers.",
       "snapshot": {
         "uptime_samples_online": 48,
         "uptime_samples_total": 48,
-        "generation_tokens_rate": 479.73333333333335,
-        "requests_running": 12,
+        "generation_tokens_rate": 300.4240740740741,
+        "requests_running": 18,
         "requests_waiting": 0
       }
     },
@@ -178,14 +178,14 @@
       "name": "Mistral-medium-3.5",
       "status": "online",
       "first_seen": "2026-07-28T11:41:06Z",
-      "last_seen": "2026-09-24T15:21:06Z",
+      "last_seen": "2026-09-28T09:51:06Z",
       "task_class": "generative",
       "note": "Not yet reviewed by aoptk maintainers.",
       "snapshot": {
-        "uptime_samples_online": 48,
+        "uptime_samples_online": 47,
         "uptime_samples_total": 48,
-        "generation_tokens_rate": 15.850000000000001,
-        "requests_running": 0,
+        "generation_tokens_rate": 73.87777777777778,
+        "requests_running": 8,
         "requests_waiting": 0
       }
     },
@@ -193,7 +193,7 @@
       "name": "multilingual-e5-large-instruct",
       "status": "online",
       "first_seen": "2026-07-28T11:41:06Z",
-      "last_seen": "2026-09-24T15:21:06Z",
+      "last_seen": "2026-09-28T09:51:06Z",
       "task_class": "generative",
       "note": "Not yet reviewed by aoptk maintainers.",
       "snapshot": {
@@ -223,7 +223,7 @@
       "name": "mxbai-embed-large:latest",
       "status": "online",
       "first_seen": "2026-07-28T11:41:06Z",
-      "last_seen": "2026-09-24T15:21:06Z",
+      "last_seen": "2026-09-28T09:51:06Z",
       "task_class": "non-generative (inferred from name)",
       "note": "Not yet reviewed by aoptk maintainers.",
       "snapshot": {
@@ -238,7 +238,7 @@
       "name": "nomic-embed-text-v1.5",
       "status": "online",
       "first_seen": "2026-07-28T11:41:06Z",
-      "last_seen": "2026-09-24T15:21:06Z",
+      "last_seen": "2026-09-28T09:51:06Z",
       "task_class": "non-generative (inferred from name)",
       "note": "Not yet reviewed by aoptk maintainers.",
       "snapshot": {
@@ -253,7 +253,7 @@
       "name": "nomic-embed-text-v2-moe",
       "status": "online",
       "first_seen": "2026-07-28T11:41:06Z",
-      "last_seen": "2026-09-24T15:21:06Z",
+      "last_seen": "2026-09-28T09:51:06Z",
       "task_class": "non-generative (inferred from name)",
       "note": "Not yet reviewed by aoptk maintainers.",
       "snapshot": {
@@ -283,7 +283,7 @@
       "name": "qwen3-embedding-4b",
       "status": "online",
       "first_seen": "2026-07-28T11:41:06Z",
-      "last_seen": "2026-09-24T15:21:06Z",
+      "last_seen": "2026-09-28T09:51:06Z",
       "task_class": "non-generative (inferred from name)",
       "note": "Not yet reviewed by aoptk maintainers.",
       "snapshot": {
@@ -298,7 +298,7 @@
       "name": "qwen3-reranker-4b",
       "status": "online",
       "first_seen": "2026-07-28T11:41:06Z",
-      "last_seen": "2026-09-24T15:21:06Z",
+      "last_seen": "2026-09-28T09:51:06Z",
       "task_class": "non-generative (inferred from name)",
       "note": "Not yet reviewed by aoptk maintainers.",
       "snapshot": {
@@ -319,22 +319,22 @@
       "snapshot": {
         "uptime_samples_online": 0,
         "uptime_samples_total": 48,
-        "generation_tokens_rate": 166.95185185185187,
-        "requests_running": 3,
-        "requests_waiting": 1
+        "generation_tokens_rate": null,
+        "requests_running": null,
+        "requests_waiting": null
       }
     },
     {
       "name": "Qwen3.5-int4",
       "status": "online",
       "first_seen": "2026-07-28T11:41:06Z",
-      "last_seen": "2026-09-24T15:21:06Z",
+      "last_seen": "2026-09-28T09:51:06Z",
       "task_class": "generative",
       "note": "aoptk vision default (DEFAULT_VISION_MODEL) since 2026-09-24, replacing the archived Qwen3.5-122b as the closest online model of the same family. Vision capability is NOT yet confirmed: the four @pytest.mark.openai vision tests have not passed on it, so verify before trusting image or scanned-PDF output.",
       "snapshot": {
         "uptime_samples_online": 48,
         "uptime_samples_total": 48,
-        "generation_tokens_rate": 50.57592592592593,
+        "generation_tokens_rate": 16.590740740740742,
         "requests_running": 0,
         "requests_waiting": 0
       }
@@ -343,13 +343,13 @@
       "name": "Qwen3.8-27b",
       "status": "online",
       "first_seen": "2026-08-14T18:59:06Z",
-      "last_seen": "2026-09-24T15:21:06Z",
+      "last_seen": "2026-09-28T09:51:06Z",
       "task_class": "generative",
       "note": "Not yet reviewed by aoptk maintainers.",
       "snapshot": {
         "uptime_samples_online": 48,
         "uptime_samples_total": 48,
-        "generation_tokens_rate": 21.492592592592594,
+        "generation_tokens_rate": 77.25555555555556,
         "requests_running": 0,
         "requests_waiting": 0
       }
@@ -358,13 +358,13 @@
       "name": "Qwen3.8-flash-next",
       "status": "online",
       "first_seen": "2026-08-26T22:44:06Z",
-      "last_seen": "2026-09-24T15:21:06Z",
+      "last_seen": "2026-09-28T09:51:06Z",
       "task_class": "generative",
       "note": "Not yet reviewed by aoptk maintainers.",
       "snapshot": {
         "uptime_samples_online": 48,
         "uptime_samples_total": 48,
-        "generation_tokens_rate": 304.7703703703704,
+        "generation_tokens_rate": 328.1240740740741,
         "requests_running": 3,
         "requests_waiting": 0
       }
