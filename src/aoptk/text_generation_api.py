@@ -6,6 +6,7 @@ from itertools import product
 from pathlib import Path
 from typing import TYPE_CHECKING
 from typing import Literal
+import openai
 import pandas as pd
 from dotenv import load_dotenv
 from jinja2 import Template
@@ -38,6 +39,7 @@ from aoptk.relationships.relationship_type import RelationshipType
 
 if TYPE_CHECKING:
     from collections.abc import Callable
+    from openai.types.chat.chat_completion import Choice as ChatCompletionChoice
     from tenacity import RetryCallState
 
 # Models used when the caller does not choose one. The e-infra endpoint retires models
@@ -85,10 +87,28 @@ def other_topics_labels(relationship_type: RelationshipType) -> str:
 
 
 class LLMFailureError(Exception):
-    """Base class for capturing LLM failures."""
+    """Base class for LLM failures that leave aoptk without a usable answer.
 
-    def __init__(self):
-        pass
+    The message says what went wrong. The no-argument `__init__` this class used to define made
+    that impossible: an empty completion and a blocked model both surfaced as the bare class
+    name, and the completion that carried the reason was discarded before construction.
+    """
+
+
+class LLMRequestError(LLMFailureError):
+    """Raised when the request itself failed, at the transport or at the endpoint.
+
+    Wraps the openai SDK's `APIError` family - HTTP status errors, connection errors, timeouts
+    and response-validation failures alike - so one `except LLMFailureError` covers aoptk's
+    failure domain without the caller importing SDK types. The SDK exception is chained with
+    `raise ... from`, which keeps its status code reachable for inspection and keeps the test
+    suite's service-outage classifier working, since that walks the cause chain.
+
+    Retrying is deliberately left to `_prompt`, which treats this like any other failure. That
+    multiplies with the SDK's own retries: with `prompt_attempts=3` and `max_retries=3` one
+    hopeless call costs up to 9 requests, so a permanent failure - bad credentials, a blocked
+    model - is reported only after all of them. That cost is the price of one hierarchy.
+    """
 
 
 class InvalidResponseError(Exception):
@@ -251,7 +271,13 @@ class TextGenerationAPI(
         exception = retry_state.outcome.exception() if retry_state.outcome else None
         if isinstance(exception, InvalidResponseError):
             return exception.response
-        raise exception if exception is not None else LLMFailureError()
+        if exception is not None:
+            raise exception
+        # tenacity only calls this once attempts are exhausted, and an exhausted run always has an
+        # outcome; getting here means the retry layer itself misbehaved, so say that rather than
+        # invent a cause.
+        message = f"retried {retry_state.attempt_number} time(s) and no failure was reported"
+        raise LLMFailureError(message)
 
     def _single_prompt(
         self,
@@ -265,21 +291,53 @@ class TextGenerationAPI(
                 "content": content,
             },
         ]
-        completion = self.client.chat.completions.create(
-            model=self.model,
-            temperature=self.temperature,
-            top_p=self.top_p,
-            messages=messages,
-        )
+        try:
+            completion = self.client.chat.completions.create(
+                model=self.model,
+                temperature=self.temperature,
+                top_p=self.top_p,
+                messages=messages,
+            )
+        except openai.APIError as error:
+            raise LLMRequestError(self._request_failure_message(error)) from error
 
-        if not (response := completion.choices[0].message.content):
-            raise LLMFailureError
+        choice = completion.choices[0]
+        if not (response := choice.message.content):
+            raise LLMFailureError(self._empty_completion_message(choice))
         response = response.strip()
         if not response:
-            raise LLMFailureError
+            raise LLMFailureError(self._empty_completion_message(choice, whitespace=True))
         if validator is not None and not validator(response):
             raise InvalidResponseError(response)
         return response
+
+    def _request_failure_message(self, error: openai.APIError) -> str:
+        """Describe a failed request without repeating anything secret.
+
+        The SDK's own message is kept because it carries the status text the endpoint returned,
+        which is the part that explains the failure. Nothing from the client is added to it.
+        """
+        status = getattr(error, "status_code", None)
+        where = f"status {status}" if isinstance(status, int) else type(error).__name__
+        return f"LLM request to {self.url!r} with model {self.model!r} failed ({where}): {error}"
+
+    def _empty_completion_message(self, choice: ChatCompletionChoice, whitespace: bool = False) -> str:
+        """Describe a completion that arrived with nothing usable in it.
+
+        `finish_reason` and `refusal` are the two fields that distinguish the cases this covers -
+        a truncated generation, a content-policy refusal, a model that simply had nothing to say -
+        and the endpoint reports no other reason for an empty answer. Neither is guaranteed to be
+        present, so both are read defensively. The API key is never part of any of this.
+
+        Args:
+            choice: The choice whose content was empty.
+            whitespace: Whether the content was whitespace rather than absent.
+        """
+        what = "only whitespace" if whitespace else "no content"
+        finish_reason = getattr(choice, "finish_reason", None) or "unknown"
+        refusal = getattr(choice.message, "refusal", None)
+        detail = f", refusal={refusal!r}" if refusal else ""
+        return f"LLM {self.model!r} returned {what} (finish_reason={finish_reason}{detail})"
 
     def _select_relationship_type(self, response: str, relationship_type: RelationshipType) -> str | None:
         """Select the relationship type based on the response.

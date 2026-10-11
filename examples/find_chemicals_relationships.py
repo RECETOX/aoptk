@@ -1,7 +1,6 @@
 import os
 from pathlib import Path
 import pandas as pd
-from openai import APIError
 from aoptk.chemical import Chemical
 from aoptk.effect import Effect
 from aoptk.relationships.relationship import Relationship
@@ -58,5 +57,6 @@ for publication in publications:
             relationship_types=relationship_types,
         )
         write_relationships(publication_id, relationships)
-    except (LLMFailureError, APIError):
+    except LLMFailureError as error:
+        print(f"{publication_id}: {error}")
         failed.append(publication)
