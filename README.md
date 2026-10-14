@@ -1,4 +1,6 @@
-[![github license badge](https://img.shields.io/github/license/rdurnik/aoptk)](https://github.com/rdurnik/aoptk) [![workflow pypi badge](https://img.shields.io/pypi/v/aoptk.svg?colorB=blue)](https://pypi.python.org/project/aoptk/) [![Bioconda](https://anaconda.org/bioconda/aoptk/badges/version.svg)](https://anaconda.org/bioconda/aoptk) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20036704.svg)](https://doi.org/10.5281/zenodo.20036704) [![workflow scq badge](https://sonarcloud.io/api/project_badges/measure?project=rdurnik_aoptk&metric=alert_status)](https://sonarcloud.io/dashboard?id=rdurnik_aoptk) [![workflow scc badge](https://sonarcloud.io/api/project_badges/measure?project=rdurnik_aoptk&metric=coverage)](https://sonarcloud.io/dashboard?id=rdurnik_aoptk) [![Documentation Status](https://readthedocs.org/projects/aoptk/badge/?version=latest)](https://aoptk.readthedocs.io/en/latest/?badge=latest) [![build](https://github.com/rdurnik/aoptk/actions/workflows/build.yml/badge.svg)](https://github.com/rdurnik/aoptk/actions/workflows/build.yml) [![cffconvert](https://github.com/rdurnik/aoptk/actions/workflows/cffconvert.yml/badge.svg)](https://github.com/rdurnik/aoptk/actions/workflows/cffconvert.yml) [![sonarcloud](https://github.com/rdurnik/aoptk/actions/workflows/sonarcloud.yml/badge.svg)](https://github.com/rdurnik/aoptk/actions/workflows/sonarcloud.yml)
+[![github license badge](https://img.shields.io/github/license/RECETOX/aoptk)](https://github.com/RECETOX/aoptk) [![workflow pypi badge](https://img.shields.io/pypi/v/aoptk.svg?colorB=blue)](https://pypi.python.org/project/aoptk/) [![Bioconda](https://anaconda.org/bioconda/aoptk/badges/version.svg)](https://anaconda.org/bioconda/aoptk) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20036704.svg)](https://doi.org/10.5281/zenodo.20036704) [![workflow scq badge](https://sonarcloud.io/api/project_badges/measure?project=RECETOX_aoptk&metric=alert_status)](https://sonarcloud.io/dashboard?id=RECETOX_aoptk) [![workflow scc badge](https://sonarcloud.io/api/project_badges/measure?project=RECETOX_aoptk&metric=coverage)](https://sonarcloud.io/dashboard?id=RECETOX_aoptk) [![Documentation Status](https://readthedocs.org/projects/aoptk/badge/?version=latest)](https://aoptk.readthedocs.io/en/latest/?badge=latest) [![build](https://github.com/RECETOX/aoptk/actions/workflows/build.yml/badge.svg)](https://github.com/RECETOX/aoptk/actions/workflows/build.yml) [![cffconvert](https://github.com/RECETOX/aoptk/actions/workflows/cffconvert.yml/badge.svg)](https://github.com/RECETOX/aoptk/actions/workflows/cffconvert.yml) [![sonarcloud](https://github.com/RECETOX/aoptk/actions/workflows/sonarcloud.yml/badge.svg)](https://github.com/RECETOX/aoptk/actions/workflows/sonarcloud.yml)
+
+![AOPTK Banner](docs/aoptk_banner_slim.png)
 ## AOP-toolkit (aoptk)  
 AOP-toolkit (aoptk) is a Python package for mining and analyzing toxicological and biomedical literature. Originally developed to support the construction of Adverse Outcome Pathways (AOPs), it provides general-purpose tools for retrieving, processing, and analyzing scientific publications.
 
@@ -26,7 +28,7 @@ conda install -c bioconda aoptk
 ### Install from source (with uv)
 
 ```console
-git clone git@github.com:rdurnik/aoptk.git
+git clone git@github.com:RECETOX/aoptk.git
 cd aoptk
 uv sync --frozen
 uv pip install .
