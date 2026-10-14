@@ -38,7 +38,7 @@ jobs:
       - name: Install dependencies with uv
         run: |
           uv lock
-          uv sync --frozen --extra dev --extra publishing
+          uv sync --frozen --extra dev --extra publishing --extra zotero
       - name: Run unit tests
         run: uv run python -m pytest -m "not openai" -v
       - name: Run OpenAI unit tests
