@@ -14,7 +14,7 @@ version: "0.5.0"
 identifiers:
   - type: doi
     value: 10.5281/zenodo.20036704
-repository-code: "https://github.com/rdurnik/aoptk"
+repository-code: "https://github.com/RECETOX/aoptk"
 keywords:
   - "AOP"
   - "toxicology"
