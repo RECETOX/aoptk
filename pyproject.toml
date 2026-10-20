@@ -70,6 +70,9 @@ docs = [
     "sphinx-autoapi",
     "myst_parser",
 ]
+zotero = [
+    "pyzotero>=1.15.2",
+]
 publishing = [
     "build",
     "twine",
@@ -84,7 +87,8 @@ ReadTheDocs = "https://aoptk.readthedocs.io"
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 markers = [
-    "openai: marks tests that require OpenAI API"
+    "openai: marks tests that require OpenAI API",
+    "zotero_local: marks tests that require a running local Zotero desktop app",
 ]
 
 

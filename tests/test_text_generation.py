@@ -93,6 +93,7 @@ def test_find_chemical(text: str, expected: list[str]):
     assert actual == expected
 
 
+@flaky(max_runs=3, min_passes=1)
 @pytest.mark.openai
 @pytest.mark.parametrize(
     ("text", "relationship_types", "chemicals", "effects", "expected_relationships"),

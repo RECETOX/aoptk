@@ -40,6 +40,26 @@ This repo includes a lightweight VS Code Dev Container in the `.devcontainer/` f
 
 To configure API access, copy `.env.example` to `.env` and fill in the required values before rebuilding the container.
 
+## Use your own Zotero library
+
+Zotero can be used as a literature database (search, metadata, abstracts, PDFs and full text).
+It needs the optional dependency: `pip install aoptk[zotero]` (conda users: `conda install -c conda-forge pyzotero`).
+
+```python
+from pathlib import Path
+from aoptk.literature.databases.zotero import Zotero
+from aoptk.literature.query import Query
+
+# remote: api.zotero.org
+zotero = Zotero(Path("storage"), Path("figures"), Query("cadmium"), library_id="123456", api_key="...", collection="ABCD1234")
+# local: Zotero desktop app running with the local API enabled
+zotero = Zotero(Path("storage"), Path("figures"), Query("cadmium"), local=True)
+
+publications = zotero.get_publications(zotero.get_ids())
+```
+
+IDs are the DOI, PMID or PMCID of an item (in this order), falling back to the Zotero item key. The `full_text_subset`, preprint, licensing and date filters of `Query` are not available and raise `NotImplementedError`. Tables and figure descriptions are not available from Zotero.
+
 ## Documentation
 
 See our [Read the Docs](https://aoptk.readthedocs.io/en/latest/).
